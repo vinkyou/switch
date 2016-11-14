@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Models.Core.LightAvailability>
+@{
+   
+
+    ViewBag.Title = "CurrentActivenodes";
+}
+
+<h2>Listado de bombillos activos</h2>
+
+<ul>
+    @foreach (var node in Model)
+    {
+        <li>
+            @node.IpAddress : @node.Port
+            @node.Status
+        </li>
+    }
+</ul>
+
+
+
+
