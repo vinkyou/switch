@@ -10,6 +10,7 @@ namespace Models.Core
     {
         private double _status = 0;
         public string IpAddress { get; set; }
+        public string Name { get; set; }
         public int Port { get; set; }
         public double Status {
             get {
