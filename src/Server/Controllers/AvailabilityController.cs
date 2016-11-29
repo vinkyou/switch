@@ -2,29 +2,25 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-
-
 
 namespace Server.Controllers
 {
     public class AvailabilityController : ApiController
     {
-
         [HttpGet]
-        public IEnumerable<LightAvailability> Get() {
+        public IEnumerable<LightAvailability> Get()
+        {
             return Server.Nodes.Values;
         }
 
         [HttpPost]
         public async Task<HttpResponseMessage> Post(HttpRequestMessage request)
         {
-            var messageText = await request.Content.ReadAsStringAsync();
+            var messageText = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             try
             {
                 var lightAvailability = JsonConvert.DeserializeObject<Models.Core.LightAvailability>(messageText);
@@ -38,9 +34,9 @@ namespace Server.Controllers
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
-            {                
+            {
                 return GetError(ex.Message);
-            }            
+            }
         }
 
         private HttpResponseMessage GetError(string message)
@@ -49,6 +45,5 @@ namespace Server.Controllers
             response.Content = new StringContent(message);
             return response;
         }
-
     }
 }
